@@ -1,6 +1,19 @@
 cumulusci:
     keychain: cumulusci.core.keychain.EncryptedFileProjectKeychain
 tasks:
+    trigger_api:
+        description: Run a public REST API
+        class_path: cumulusci.tasks.push.trigger_api.TriggerApiTask
+        options:
+            api_host: https://api.runscope.com
+            path: /radar/b218ec5e-2afc-4e89-98f1-3ade5aaea712/trigger?runscope_environment=8fae6b00-93df-4b4b-b9ed-70993a292234
+            method: POST
+    generate_data_from_datapy:
+        class_path: cumulusci.tasks.bulkdata.load_data_from_datapy.LoadDataFromDatapy
+        group: Data Operations
+    trigger_rafi_test:
+        class_path: cumulusci.tasks.bulkdata.execute_rafi_tests.ExecuteRafi
+        group: Data Operations
     activate_flow:
         group: Metadata Transformations
         description: Activates Flows identified by a given list of Developer Names
